@@ -5,8 +5,11 @@
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "electron": "electron .",
+"electron dist": "electron ."
   },
+  "main": "electron.js",
   "dependencies": {
     "@angular/common": "2.1.1",
     "@angular/compiler": "2.1.1",
@@ -26,12 +29,13 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "0.0.43",
+    "electron-prebuilt": "^1.4.6",
     "typescript": "2.0.6"
   },
   "cordovaPlugins": [
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
     "cordova-plugin-whitelist",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard"
@@ -44,5 +48,5 @@
       "locator": "ios"
     }
   ],
-  "description": "MyIonic2Project: An Ionic project"
+  "description": "ionic2-electron: An Ionic project"
 }
