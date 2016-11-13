@@ -5,6 +5,18 @@ import { NotesPage } from '../pages/notes/notes';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NotesService } from '../services/notes-services';
 import {AccountPage} from '../pages/account/account';
+import { AngularFireModule } from 'angularfire2';
+
+
+// Must export the config
+export const firebaseConfig = {
+  apiKey: "AIzaSyDr3-a2rqeDpv-o2-A8o9f2_pgv0xTCA5w",
+  authDomain: "notes-b3ab6.firebaseapp.com",
+  databaseURL: "https://notes-b3ab6.firebaseio.com",
+  storageBucket: "",
+  messagingSenderId: "497427015271"
+};
+
 
 @NgModule({
   declarations: [
@@ -14,7 +26,8 @@ import {AccountPage} from '../pages/account/account';
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -23,6 +36,6 @@ import {AccountPage} from '../pages/account/account';
     NotesPage,
     TabsPage
   ],
-  providers: [ NotesService ]
+  providers: [NotesService]
 })
-export class AppModule {}
+export class AppModule { }

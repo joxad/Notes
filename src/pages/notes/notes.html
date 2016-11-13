@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-card *ngFor="let note of notes">
+    <ion-card *ngFor="let note of notes | async">
       <ion-card-content>
         <ion-card-title>
           {{note.title}}
