@@ -5,6 +5,7 @@ import { NotesService} from '../../services/notes-services';
 import { Note } from '../../model/note';
 
 @Component({
+  selector : 'page-notes',
   templateUrl: 'notes.html'
 })
 export class NotesPage implements OnInit {

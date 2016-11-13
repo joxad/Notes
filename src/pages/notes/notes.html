@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Notes</ion-title>
-  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-      <ion-card *ngFor="let note of notes">
-        <ion-card-content>
-          <ion-card-title>
-            {{note.title}}
-          </ion-card-title>
-        </ion-card-content>
-      </ion-card>
+    <ion-card *ngFor="let note of notes">
+      <ion-card-content>
+        <ion-card-title>
+          {{note.title}}
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 </ion-content>

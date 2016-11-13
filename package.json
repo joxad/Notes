@@ -46,7 +46,7 @@
       "platform": "ios",
       "version": "",
       "locator": "ios"
-    }
+    }, "android"
   ],
   "description": "ionic2-electron: An Ionic project"
 }

@@ -16,7 +16,16 @@ Crossplatform note application using ionic & electron
 
 - npm install
 
-- ionic serve (will start the project ionic)
+- Android SDK
+
+Install Android
+Install JDK 8
+Export path of android SDK
+
+# Start the app
+
+- ionic serve (will start the web app on chrome)
+- ionic run android
 - electron . (will start the desktop one)
 
 Usefull blog post : http://blog.thecodecampus.de/setup-ionic-2-electron-typescript-angular2/
