@@ -1,8 +1,31 @@
-# Notes
-Crossplatform note application using ionic & electron
+
+# Project : Notes
+Crossplatform note application using ionic & electron with Angular 2.
+
+# Steps done
+
+- Create web application
+- Create desktop application
+- Create mobile applications
+- List a mock of notes
+
+#TODO
+
+- Manage the version code of the apps
+
+> Locally
+
+- Create - edit a note
+- Show the detail of a note
+
+> WS
+
+- Add a backoffice (firebase ?)
+- Get the note from the api
+- Share note between users
+
 
 #Installation
-
 
 - Install ionic2 see the website http://ionicframework.com/docs/v2/getting-started/installation/
 
