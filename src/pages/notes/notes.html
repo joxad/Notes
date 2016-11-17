@@ -1,17 +1,32 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-searchbar ></ion-searchbar>
+    <ion-buttons start>
+      <button ion-button color="royal">
+        <ion-icon class="icon" name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Notes</ion-title>
+    <ion-buttons end>
+      <button ion-button color="royal" (click)="showAccount()">
+        <ion-icon class="icon"  name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-card *ngFor="let note of notes | async">
-      <ion-card-content>
-        <ion-card-title>
-          {{note.title}}
-        </ion-card-title>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+  <ion-grid>
+    <ion-row *ngFor="let row of grid">
+      <ion-col width-33 *ngFor="let note of row">
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              {{note.title}}
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

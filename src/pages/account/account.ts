@@ -9,6 +9,9 @@ import { OnInit } from '@angular/core';
   constructor() {
 
   }
+  presentModal() {
+
+   }
 
   ngOnInit() : void {
 
