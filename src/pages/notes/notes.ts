@@ -34,7 +34,7 @@ export class NotesPage implements OnInit {
     let modal = this.modalCtrl.create(AccountPage);
     modal.present();
   }
-  
+
   addNotes(): void {
 
     let rowNum = 0; //counter to iterate over the rows in the grid

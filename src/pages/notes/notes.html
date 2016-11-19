@@ -14,8 +14,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-grid>
+<ion-content>
+
+        <ion-card class="cardHeader">
+            <ion-input type="text" placeholder="Contenu de votre note"></ion-input>
+        </ion-card>
+
+  <ion-grid padding>
     <ion-row *ngFor="let row of grid">
       <ion-col width-33 *ngFor="let note of row">
         <ion-card>
