@@ -8,6 +8,8 @@ Crossplatform note application using ionic & electron with Angular 2.
 - Create desktop application
 - Create mobile applications
 - List a mock of notes
+- Add a backoffice (firebase with angularfire2)
+- Get the notes from the api
 
 #TODO
 
@@ -20,10 +22,9 @@ Crossplatform note application using ionic & electron with Angular 2.
 
 > WS
 
-- Add a backoffice (firebase ?)
-- Get the note from the api
+- Account Login
 - Share note between users
-
+- Link a note to a user
 
 #Installation
 

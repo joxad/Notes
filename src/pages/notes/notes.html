@@ -16,14 +16,12 @@
 
 <ion-content>
 
-  <ion-card class="cardHeader" clear (click)="createNote()">
-    <ion-input type="text" placeholder="Titre" *ngIf="newNote"></ion-input>
-    <ion-input type="text" placeholder="Contenu de votre note..."></ion-input>
+  <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
+    <ion-input [(ngModel)]="noteTitle" type="text" class="title" placeholder="Titre" *ngIf="newNote"></ion-input>
+    <ion-input [(ngModel)]="noteContent" type="text" placeholder="Contenu de votre note..."></ion-input>
 
     <ion-item *ngIf="newNote">
-      <button primary clear item-right >
-      <ion-icon  name="navigate"> OK </ion-icon>
-    </button>
+      <button ion-button clear item-right (click)="createNote()">OK</button>
     </ion-item>
   </ion-card>
 

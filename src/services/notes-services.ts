@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import { Note } from '../model/note';
-import { NOTES } from './mock-notes';
 
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
@@ -13,5 +12,9 @@ export class NotesService {
 
   all(): FirebaseListObservable<Note[]> {
     return this.af.database.list('/notes');
+  }
+
+  save(note : Note) : void {
+    this.af.database.list('/notes').push(note);
   }
 }
