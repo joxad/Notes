@@ -13,12 +13,12 @@ import { PageNote} from '../note/note';
 })
 export class NotesPage implements OnInit {
 
-  noteContent : string;
-  noteTitle : string;
+  noteContent: string;
+  noteTitle: string;
   notes: Array<Note>;
   grid: Array<Array<Note>>; //array of arrays
   selectedNote: any;
-  newNote: any;
+  showCreate: boolean;
 
   constructor(public popoverCtrl: PopoverController, public modalCtrl: ModalController, public navCtrl: NavController, private notesService: NotesService) {
 
@@ -27,13 +27,12 @@ export class NotesPage implements OnInit {
   getNotes(): void {
     this.notesService.all().subscribe(notes => {
       this.notes = notes;
-      this.grid = Array(Math.ceil(this.notes.length / 2)); //MATHS!
-      this.addNotes();
     });
   }
 
   ngOnInit(): void {
     this.getNotes();
+    this.showCreate = false;
   }
 
   showAccount(): void {
@@ -43,40 +42,23 @@ export class NotesPage implements OnInit {
 
 
   showCreateNoteView(): void {
-    this.newNote = new Note();
+    this.showCreate = true;
+  }
+  hideCreateNoteView(): void {
+    this.showCreate = false;
   }
 
+
   createNote(): void {
-    this.newNote.title = this.noteTitle;
-    this.newNote.content = this.noteContent;
-    this.notesService.save(this.newNote);
+    var newNote: Note;
+    newNote = new Note();
+    newNote.title = this.noteTitle;
+    newNote.content = this.noteContent;
+    this.notesService.save(newNote);
+    this.showCreate = false;
   }
 
   showNote(note: Note): void {
     this.selectedNote = note;
-  }
-
-  addNotes(): void {
-
-    let rowNum = 0; //counter to iterate over the rows in the grid
-
-    for (let i = 0; i < this.notes.length; i += 3) { //iterate images
-
-      this.grid[rowNum] = Array(3); //declare two elements per row
-
-      if (this.notes[i]) { //check file URI exists
-        this.grid[rowNum][0] = this.notes[i] //insert image
-      }
-
-      if (this.notes[i + 1]) { //repeat for the second image
-        this.grid[rowNum][1] = this.notes[i + 1]
-      }
-
-      if (this.notes[i + 2]) { //repeat for the second image
-        this.grid[rowNum][2] = this.notes[i + 2]
-      }
-      rowNum++; //go on to the next row
-    }
-
   }
 }

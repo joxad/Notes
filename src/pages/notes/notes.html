@@ -16,27 +16,26 @@
 
 <ion-content>
 
-  <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
-    <ion-input [(ngModel)]="noteTitle" type="text" class="title" placeholder="Titre" *ngIf="newNote"></ion-input>
-    <ion-input [(ngModel)]="noteContent" type="text" placeholder="Contenu de votre note..."></ion-input>
+  <div class="overlay" (click)="hideCreateNoteView()"></div>
 
-    <ion-item *ngIf="newNote">
-      <button ion-button clear item-right (click)="createNote()">OK</button>
-    </ion-item>
+  <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
+      <ion-input [(ngModel)]="noteTitle" type="text" class="title" placeholder="Titre" *ngIf="showCreate"></ion-input>
+      <ion-input [(ngModel)]="noteContent" type="text" placeholder="Contenu de votre note..."></ion-input>
+
+      <ion-item *ngIf="showCreate">
+        <button ion-button clear item-right (click)="createNote()">OK</button>
+      </ion-item>
   </ion-card>
 
-  <ion-grid padding>
-    <ion-row *ngFor="let row of grid">
-      <ion-col width-33 *ngFor="let note of row">
-        <ion-card (click)="showNote(note)">
-          <ion-card-content>
-            <ion-card-title>
-              {{note.title}}
-            </ion-card-title>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-  </ion-grid>
+  <ion-list no-lines>
+    <ion-item *ngFor="let note of notes">
+      <ion-card (click)="showNote(note)">
+        <ion-card-content>
+          <ion-card-title>
+            {{note.title}}
+          </ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>
