@@ -5,7 +5,7 @@ import { NotesService} from '../../services/notes-services';
 import { Note } from '../../model/note';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AccountPage } from '../account/account';
-import { PageNote} from '../note/note';
+import { DetailNote} from '../detail-note/detail-note';
 
 @Component({
   selector: 'page-notes',
@@ -38,7 +38,6 @@ export class NotesPage implements OnInit {
     modal.present();
   }
 
-
   showCreateNoteView(): void {
     this.showCreate = true;
   }
@@ -47,11 +46,14 @@ export class NotesPage implements OnInit {
     console.log("hide");
   }
 
+  deleteNote(key: string): void {
+    this.notesService.delete(key);
+  }
 
   createNote(): void {
     let newNote = new Note();
     newNote.title = this.noteTitle;
-    newNote.content= this.noteContent;
+    newNote.content = this.noteContent;
     this.notesService.save(newNote);
     console.log("save");
     this.hideCreateNoteView();
@@ -59,5 +61,8 @@ export class NotesPage implements OnInit {
 
   showNote(note: Note): void {
     this.selectedNote = note;
+    this.navCtrl.push(DetailNote, {
+      note: note
+    });
   }
 }

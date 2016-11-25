@@ -5,9 +5,9 @@ import { NotesPage } from '../pages/notes/notes';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AccountPage } from '../pages/account/account';
 import { NotesService } from '../services/notes-services';
-import { AngularFireModule,  AuthProviders, AuthMethods  } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods  } from 'angularfire2';
 import { AuthService} from '../services/auth-service';
-
+import { DetailNote} from '../pages/detail-note/detail-note';
 // Must export the config
 export const firebaseConfig = {
   apiKey: "AIzaSyDr3-a2rqeDpv-o2-A8o9f2_pgv0xTCA5w",
@@ -27,18 +27,20 @@ const firebaseAuthConfig = {
     MyApp,
     NotesPage,
     AccountPage,
-    TabsPage
+    TabsPage,
+    DetailNote
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig,firebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     NotesPage,
     AccountPage,
-    TabsPage
+    TabsPage,
+    DetailNote
   ],
   providers: [NotesService, AuthService]
 })

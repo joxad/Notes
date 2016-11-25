@@ -17,9 +17,9 @@ export class NotesService {
   save(note : Note) : void {
     this.af.database.list('/notes').push(note);
   }
-  
-  delete(note : Note) : void {
-    this.af.database.list('/notes').remove(note.id);
+
+  delete(key : string) : void {
+    this.af.database.list('/notes').remove(key);
   }
 
 }
