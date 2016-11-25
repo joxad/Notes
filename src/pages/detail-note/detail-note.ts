@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Note } from '../../model/note';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
+
 @Component({
   selector: 'detail-note',
   templateUrl: 'detail-note.html'
@@ -8,14 +9,16 @@ import {NavController, NavParams} from 'ionic-angular';
 export class DetailNote implements OnInit {
 
   note: any;
-  constructor(private navController: NavController, private navParams: NavParams) {
-
+  constructor(private navController: NavController, private navParams: NavParams, private viewCtrl:ViewController) {
+    this.note = navParams.get('note');
   }
 
   ngOnInit(): void {
-    this.note = this.navParams.get('note');
 
   }
 
+  dismiss() :void {
+    this.viewCtrl.dismiss();
+  }
 
 }

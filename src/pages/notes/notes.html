@@ -18,7 +18,7 @@
 
   <div class="overlay" (click)="hideCreateNoteView()"></div>
 
-  <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
+  <ion-card class="cardHeader" clear (click)="showCreateNoteNewPage()">
     <ion-input [(ngModel)]="noteTitle" type="text" class="title" placeholder="Titre" *ngIf="showCreate"></ion-input>
     <ion-input [(ngModel)]="noteContent" type="text" text-center placeholder="Une nouvelle idée ? Ajoute ça ici ;)"></ion-input>
     <ion-item *ngIf="showCreate">
@@ -36,7 +36,7 @@
             </ion-col>
             <ion-col>
               <ion-buttons end>
-                <button (click)="deleteNote(note.$key)">
+                <button ion-button icon-only (click)="deleteNote(note.$key)">
                   <ion-icon name="trash" class="icon"></ion-icon>
                 </button>
               </ion-buttons>

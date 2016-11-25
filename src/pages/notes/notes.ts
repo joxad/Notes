@@ -59,6 +59,12 @@ export class NotesPage implements OnInit {
     this.hideCreateNoteView();
   }
 
+  showCreateNoteNewPage() : void {
+    let newNote = new Note();
+    this.navCtrl.push(DetailNote, {
+      note: newNote
+    });
+  }
   showNote(note: Note): void {
     this.selectedNote = note;
     this.navCtrl.push(DetailNote, {
