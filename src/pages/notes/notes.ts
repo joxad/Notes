@@ -15,7 +15,7 @@ export class NotesPage implements OnInit {
 
   noteContent: string;
   noteTitle: string;
-  notes: Array<Note>;
+  notes: FirebaseListObservable<Note[]>;
   grid: Array<Array<Note>>; //array of arrays
   selectedNote: any;
   showCreate: boolean;
@@ -25,9 +25,7 @@ export class NotesPage implements OnInit {
   }
 
   getNotes(): void {
-    this.notesService.all().subscribe(notes => {
-      this.notes = notes;
-    });
+    this.notes = this.notesService.all();
   }
 
   ngOnInit(): void {
@@ -46,16 +44,17 @@ export class NotesPage implements OnInit {
   }
   hideCreateNoteView(): void {
     this.showCreate = false;
+    console.log("hide");
   }
 
 
   createNote(): void {
-    var newNote: Note;
-    newNote = new Note();
+    let newNote = new Note();
     newNote.title = this.noteTitle;
-    newNote.content = this.noteContent;
+    newNote.content= this.noteContent;
     this.notesService.save(newNote);
-    this.showCreate = false;
+    console.log("save");
+    this.hideCreateNoteView();
   }
 
   showNote(note: Note): void {

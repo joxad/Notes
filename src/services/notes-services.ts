@@ -6,7 +6,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 @Injectable()
 export class NotesService {
 
-  constructor(private af : AngularFire) {
+  constructor(private af: AngularFire) {
 
   }
 
@@ -17,4 +17,9 @@ export class NotesService {
   save(note : Note) : void {
     this.af.database.list('/notes').push(note);
   }
+  
+  delete(note : Note) : void {
+    this.af.database.list('/notes').remove(note.id);
+  }
+
 }

@@ -1,5 +1,7 @@
 export class Note {
-  id : number;
-  title : String;
-  content : String;
+  id : string;
+  title : string;
+  content : string;
+  dateCreation: number;
+
 }
