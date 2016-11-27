@@ -21,11 +21,6 @@
     <ion-input type="password" [(ngModel)]="account.password"></ion-input>
   </ion-item>
 
-  <ion-item *ngIf="isCreate">
-    <ion-label floating>Oops ce compte ne semble pas exister ! Confirme ton mot de passe pour le créer.</ion-label>
-    <ion-input type="password" [(ngModel)]="newAccount.password"></ion-input>
-  </ion-item>
-
   <button class="btnconnect" clear ion-button color="royal" (click)="connect()">
     <ion-label>Se connecter</ion-label>
     <ion-icon class="icon"  name="log-in"></ion-icon>
