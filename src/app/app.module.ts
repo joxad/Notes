@@ -8,6 +8,7 @@ import { NotesService } from '../services/notes-services';
 import { AngularFireModule, AuthProviders, AuthMethods  } from 'angularfire2';
 import { AuthService} from '../services/auth-service';
 import { DetailNote} from '../pages/detail-note/detail-note';
+import { RemindPage} from '../pages/reminder/page-remind';
 // Must export the config
 export const firebaseConfig = {
   apiKey: "AIzaSyDr3-a2rqeDpv-o2-A8o9f2_pgv0xTCA5w",
@@ -28,7 +29,8 @@ const firebaseAuthConfig = {
     NotesPage,
     AccountPage,
     TabsPage,
-    DetailNote
+    DetailNote,
+    RemindPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -40,7 +42,8 @@ const firebaseAuthConfig = {
     NotesPage,
     AccountPage,
     TabsPage,
-    DetailNote
+    DetailNote,
+    RemindPage
   ],
   providers: [NotesService, AuthService]
 })

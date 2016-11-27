@@ -20,7 +20,11 @@ export class NotesPage implements OnInit {
   selectedNote: any;
   showCreate: boolean;
 
-  constructor(public popoverCtrl: PopoverController, public modalCtrl: ModalController, public navCtrl: NavController, private notesService: NotesService) {
+  constructor(
+    private popoverCtrl: PopoverController,
+    private modalCtrl: ModalController,
+    private navCtrl: NavController,
+    private notesService: NotesService) {
 
   }
 
@@ -59,7 +63,7 @@ export class NotesPage implements OnInit {
     this.hideCreateNoteView();
   }
 
-  showCreateNoteNewPage() : void {
+  showCreateNoteNewPage(): void {
     let newNote = new Note();
     this.navCtrl.push(DetailNote, {
       note: newNote

@@ -1,20 +1,51 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons end>
+      <button ion-button color="royal" (click)="personAdd()">
+        <ion-icon class="icon"  name="person-add"></ion-icon>
+      </button>
+      <button ion-button color="royal" (click)="personAdd()">
+        <ion-icon class="icon"  name="share"></ion-icon>
+      </button>
+      <button ion-button color="royal" (click)="star()">
+        <ion-icon class="icon"  name="star"></ion-icon>
+      </button>
+      <button ion-button color="royal" (click)="notify()">
+        <ion-icon class="icon"  name="notifications"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons left>
       <button ion-button color="royal" (click)="dismiss()">
-        <ion-icon class="icon"  name="close"></ion-icon>
+        <ion-icon class="icon"  name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <ion-card class="cardHeader" clear>
-    <ion-input [(ngModel)]="noteTitle" type="text" class="title" placeholder="Titre"></ion-input>
-    <ion-input [(ngModel)]="noteContent" type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)"></ion-input>
-    <ion-item>
-      <button ion-button clear item-right (click)="createNote()">OK</button>
-    </ion-item>
+    <ion-input type="text" class="title" placeholder="Titre"></ion-input>
+    <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)"></ion-input>
+    <ion-list>
+      <ion-item *ngFor="let items of note.items | async">
+      </ion-item>
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button clear (click)="attach()">
+          <ion-icon  name="attach"></ion-icon>
+        </button>
+        <button ion-button clear (click)="checklist()">
+          <ion-icon  name="list"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col width-10>
+        <button ion-button clear (click)="saveNote()">OK</button>
+      </ion-col>
+    </ion-row>
   </ion-card>
-<ion-content>
+  <!-->checkbox-outline
+  <-->
+</ion-content>
