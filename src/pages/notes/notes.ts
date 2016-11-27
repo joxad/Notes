@@ -13,8 +13,7 @@ import { DetailNote} from '../detail-note/detail-note';
 })
 export class NotesPage implements OnInit {
 
-  noteContent: string;
-  noteTitle: string;
+  newNote : Note;
   notes: FirebaseListObservable<Note[]>;
   grid: Array<Array<Note>>; //array of arrays
   selectedNote: any;
@@ -25,7 +24,8 @@ export class NotesPage implements OnInit {
     private modalCtrl: ModalController,
     private navCtrl: NavController,
     private notesService: NotesService) {
-
+      this.newNote = new Note();
+      this.showCreate = false;
   }
 
   getNotes(): void {
@@ -55,11 +55,9 @@ export class NotesPage implements OnInit {
   }
 
   createNote(): void {
-    let newNote = new Note();
-    newNote.title = this.noteTitle;
-    newNote.content = this.noteContent;
-    this.notesService.save(newNote);
+    this.notesService.create(this.newNote);
     console.log("save");
+    this.newNote = new Note();
     this.hideCreateNoteView();
   }
 

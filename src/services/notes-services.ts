@@ -14,8 +14,19 @@ export class NotesService {
     return this.af.database.list('/notes');
   }
 
-  save(note : Note) : void {
+  create(note : Note) : void {
     this.af.database.list('/notes').push(note);
+  }
+
+  update(key : string, note : Note) : void {
+    this.af.database.list('/notes').update(key, {
+      "title" : note.title,
+      "content" : note.content,
+      "reminder" : note.reminder
+    }
+
+
+    );
   }
 
   delete(key : string) : void {

@@ -10,7 +10,7 @@
       <button ion-button color="royal" (click)="star()">
         <ion-icon class="icon"  name="star"></ion-icon>
       </button>
-      <button ion-button color="royal" (click)="notify()">
+      <button ion-button color="royal" (click)="showTime()">
         <ion-icon class="icon"  name="notifications"></ion-icon>
       </button>
     </ion-buttons>
@@ -25,13 +25,21 @@
 <ion-content>
 
   <ion-card class="cardHeader" clear>
-    <ion-input type="text" class="title" placeholder="Titre"></ion-input>
-    <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)"></ion-input>
+    <ion-input type="text" class="title" placeholder="Titre" [(ngModel)]="note.title"></ion-input>
+    <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)" [(ngModel)]="note.content"></ion-input>
     <ion-list>
       <ion-item *ngFor="let items of note.items | async">
       </ion-item>
     </ion-list>
-
+    <ion-item style="display:none">
+      <ion-datetime #dateTime displayFormat="MM/DD/YYYY HH:mm" min="{{minDate}}" max="2020-10-31" [(ngModel)]="note.reminder"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf="note.reminder">
+      <ion-label>
+        Prochain rappel :
+      </ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY HH:mm" min="{{minDate}}" max="2020-10-31" [(ngModel)]="note.reminder"></ion-datetime>
+    </ion-item>
     <ion-row>
       <ion-col>
         <button ion-button clear (click)="attach()">

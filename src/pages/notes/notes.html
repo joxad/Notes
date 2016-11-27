@@ -18,12 +18,22 @@
 
   <div class="overlay" (click)="hideCreateNoteView()"></div>
 
-  <ion-card class="cardHeader" clear (click)="showCreateNoteNewPage()">
-    <ion-input [(ngModel)]="noteTitle" type="text" class="title" placeholder="Titre" *ngIf="showCreate"></ion-input>
-    <ion-input [(ngModel)]="noteContent" type="text" text-center placeholder="Une nouvelle idée ? Ajoute ça ici ;)"></ion-input>
-    <ion-item *ngIf="showCreate">
-      <button ion-button clear item-right (click)="createNote()">OK</button>
-    </ion-item>
+  <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
+    <ion-input *ngIf="showCreate" type="text" class="title" placeholder="Titre" [(ngModel)]="newNote.title"></ion-input>
+    <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)" [(ngModel)]="newNote.content"></ion-input>
+    <ion-row *ngIf="showCreate">
+      <ion-col>
+        <button ion-button clear>
+          <ion-icon  name="attach"></ion-icon>
+        </button>
+        <button ion-button clear>
+          <ion-icon  name="list"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col width-20>
+        <button ion-button clear (click)="createNote()">OK</button>
+      </ion-col>
+    </ion-row>
   </ion-card>
 
   <ion-list no-lines>
@@ -31,12 +41,12 @@
       <ion-card (click)="showNote(note)">
         <ion-card-title>
           <ion-row>
-            <ion-col padding>
+            <ion-col *ngIf="note.title" padding>
               {{note.title}}
             </ion-col>
             <ion-col>
               <ion-buttons end>
-                <button color="royal" clear  ion-button icon-only (click)="deleteNote(note.$key)">
+                <button clear color="royal" ion-button (click)="deleteNote(note.$key)">
                   <ion-icon name="trash" class="icon"></ion-icon>
                 </button>
               </ion-buttons>
@@ -44,7 +54,11 @@
           </ion-row>
         </ion-card-title>
         <ion-card-content>
-          {{note.content}}
+          <ion-item>
+            {{note.content}}
+          </ion-item>
+
+
         </ion-card-content>
       </ion-card>
     </ion-item>

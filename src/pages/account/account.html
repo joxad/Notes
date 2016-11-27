@@ -13,15 +13,16 @@
 
 
   <ion-item>
-   <ion-label floating>Ton email?</ion-label>
-   <ion-input type="text"></ion-input>
- </ion-item>
+    <ion-label floating>Ton email?</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
 
- <ion-item>
+  <ion-item>
     <ion-label floating>Ton mot de passe?</ion-label>
     <ion-input type="password"></ion-input>
   </ion-item>
-  <button ion-button color="royal" (click)="dismiss()">
+  <button class="btnconnect" ion-button color="royal" (click)="dismiss()">
+    <ion-label>Se connecter</ion-label>
     <ion-icon class="icon"  name="log-in"></ion-icon>
   </button>
 </ion-content>

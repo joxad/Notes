@@ -3,5 +3,6 @@ export class Note {
   content : string;
   dateCreation: number;
   checklist : boolean;
+  reminder : Date;
   items : [any];
 }
