@@ -1,36 +1,41 @@
 import {Injectable} from '@angular/core';
 import { Note } from '../model/note';
-
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import {Http, Headers,RequestOptions} from '@angular/http';
+import { BASE_URL } from './config';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class NotesService {
-
-  constructor(private af: AngularFire) {
+  private notesUrl = "http://localhost:3030/notes";
+  private headers : any;
+  private options : any;
+  data: any;
+  constructor(private http: Http) {
+    this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    this.options = new RequestOptions({ headers: this.headers }); // Create a request option
 
   }
 
-  all(): FirebaseListObservable<Note[]> {
-    return this.af.database.list('/notes');
+  all() {
+      return this.http.get(this.notesUrl)
+        .map(res => res.json())
+        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+
   }
 
-  create(note : Note) : void {
-    this.af.database.list('/notes').push(note);
+  create(note: Note) {
+      return this.http.post(this.notesUrl, note, this.options)
+        .map(res => res.json())
+        .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+
   }
 
-  update(key : string, note : Note) : void {
-    this.af.database.list('/notes').update(key, {
-      "title" : note.title,
-      "content" : note.content,
-      "reminder" : note.reminder
-    }
-
-
-    );
+  update(key: string, note: Note): void {
   }
 
-  delete(key : string) : void {
-    this.af.database.list('/notes').remove(key);
+  delete(key: string): void {
   }
 
 }

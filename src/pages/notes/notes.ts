@@ -3,7 +3,6 @@ import { NavController, ModalController, PopoverController } from 'ionic-angular
 import { OnInit } from '@angular/core';
 import { NotesService} from '../../services/notes-services';
 import { Note } from '../../model/note';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AccountPage } from '../account/account';
 import { DetailNote} from '../detail-note/detail-note';
 
@@ -13,8 +12,8 @@ import { DetailNote} from '../detail-note/detail-note';
 })
 export class NotesPage implements OnInit {
 
-  newNote : Note;
-  notes: FirebaseListObservable<Note[]>;
+  newNote: Note;
+  notes: any;
   grid: Array<Array<Note>>; //array of arrays
   selectedNote: any;
   showCreate: boolean;
@@ -24,18 +23,23 @@ export class NotesPage implements OnInit {
     private modalCtrl: ModalController,
     private navCtrl: NavController,
     private notesService: NotesService) {
-      this.newNote = new Note();
-      this.showCreate = false;
+    this.newNote = new Note();
+    this.showCreate = false;
   }
-
-  getNotes(): void {
-    this.notes = this.notesService.all();
-  }
-
   ngOnInit(): void {
     this.getNotes();
     this.showCreate = false;
   }
+
+  getNotes(): void {
+    this.notesService.all()
+      .subscribe(json => {
+        this.notes = json.data;
+      }, err => {
+        console.log(err);
+      });
+  }
+
 
   showAccount(): void {
     let modal = this.modalCtrl.create(AccountPage);
@@ -55,7 +59,13 @@ export class NotesPage implements OnInit {
   }
 
   createNote(): void {
-    this.notesService.create(this.newNote);
+    this.notesService.create(this.newNote).subscribe(
+      data => {
+        console.log(data);
+        this.getNotes();
+      },
+      err => { console.log(err) }
+    );
     console.log("save");
     this.newNote = new Note();
     this.hideCreateNoteView();

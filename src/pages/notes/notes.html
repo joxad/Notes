@@ -37,7 +37,7 @@
   </ion-card>
 
   <ion-list no-lines>
-    <ion-item *ngFor="let note of notes | async">
+    <ion-item *ngFor="let note of notes">
       <ion-card (click)="showNote(note)">
         <ion-card-title>
           <ion-row>
