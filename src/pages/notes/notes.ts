@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, PopoverController } from 'ionic-angular';
+import { NavController, ToastController, ModalController, PopoverController } from 'ionic-angular';
 import { OnInit } from '@angular/core';
 import { NotesService} from '../../services/notes-services';
 import { Note } from '../../model/note';
 import { AccountPage } from '../account/account';
 import { DetailNote} from '../detail-note/detail-note';
-
 @Component({
   selector: 'page-notes',
   templateUrl: 'notes.html'
@@ -14,7 +13,6 @@ export class NotesPage implements OnInit {
 
   newNote: Note;
   notes: any;
-  grid: Array<Array<Note>>; //array of arrays
   selectedNote: any;
   showCreate: boolean;
 
@@ -22,7 +20,8 @@ export class NotesPage implements OnInit {
     private popoverCtrl: PopoverController,
     private modalCtrl: ModalController,
     private navCtrl: NavController,
-    private notesService: NotesService) {
+    private notesService: NotesService,
+    private toastController: ToastController) {
     this.newNote = new Note();
     this.showCreate = false;
   }
@@ -40,7 +39,6 @@ export class NotesPage implements OnInit {
       });
   }
 
-
   showAccount(): void {
     let modal = this.modalCtrl.create(AccountPage);
     modal.present();
@@ -54,19 +52,27 @@ export class NotesPage implements OnInit {
     console.log("hide");
   }
 
-  deleteNote(key: string): void {
-    this.notesService.delete(key);
+  deleteNote(note: Note): void {
+    this.notesService.delete(note._id).subscribe(data => {
+        this.showToast(note.title + "has been deleted", 2000);
+        this.notes.remove(note);
+
+    }, err => {
+      console.log("delete error");
+      this.showToast(err, 2000);
+    });
   }
 
   createNote(): void {
     this.notesService.create(this.newNote).subscribe(
       data => {
         console.log(data);
-        this.getNotes();
+        this.notes = [ data, ...this.notes];
       },
-      err => { console.log(err) }
+      err => {
+        console.log(err);
+       }
     );
-    console.log("save");
     this.newNote = new Note();
     this.hideCreateNoteView();
   }
@@ -83,4 +89,14 @@ export class NotesPage implements OnInit {
       note: note
     });
   }
+
+  showToast(message: string, duration : number): void {
+    let toast = this.toastController.create({
+      message: message,
+      duration: duration
+    });
+    toast.present();
+  }
+
+
 }

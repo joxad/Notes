@@ -11,25 +11,32 @@ import * as moment from 'moment';
 export class DetailNote implements OnInit {
   @ViewChild('dateTime') dateSelector;
 
-  minDate : string;
-  checklist : boolean;
+  minDate: string;
+  checklist: boolean;
   note: any;
   constructor(
     private navController: NavController,
     private navParams: NavParams,
-    private viewCtrl:ViewController,
+    private viewCtrl: ViewController,
     private notesService: NotesService) {
     this.note = navParams.get('note');
     this.minDate = moment().startOf('day').format('YYYY-MM-DD');
   }
 
   ngOnInit(): void {
-      this.checklist = false;
+    this.checklist = false;
   }
 
   saveNote(): void {
-    if (this.note.$key) {
-      this.notesService.update(this.note.$key,this.note);
+    if (this.note._id) {
+      this.notesService.update(this.note).subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
     else {
       this.notesService.create(this.note);
@@ -37,11 +44,25 @@ export class DetailNote implements OnInit {
     console.log("save");
   }
 
-  showTime() : void {
+  checklistMode() : void {
+    this.checklist = true;
+  }
+  attach(): void {
+
+  }
+  showTime(): void {
     this.dateSelector.open();
   }
-  dismiss() :void {
+  dismiss(): void {
     this.viewCtrl.dismiss();
   }
+  personAdd(): void {
 
+  }
+  share(): void {
+
+  }
+  star(): void {
+
+  }
 }

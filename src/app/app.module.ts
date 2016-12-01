@@ -7,7 +7,6 @@ import { AccountPage } from '../pages/account/account';
 import { NotesService } from '../services/notes-services';
 import { AuthService} from '../services/auth-service';
 import { DetailNote} from '../pages/detail-note/detail-note';
-import { RemindPage} from '../pages/reminder/page-remind';
 // Must export the config
 export const firebaseConfig = {
   apiKey: "AIzaSyDr3-a2rqeDpv-o2-A8o9f2_pgv0xTCA5w",
@@ -24,8 +23,7 @@ export const firebaseConfig = {
     NotesPage,
     AccountPage,
     TabsPage,
-    DetailNote,
-    RemindPage
+    DetailNote
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,8 +34,7 @@ export const firebaseConfig = {
     NotesPage,
     AccountPage,
     TabsPage,
-    DetailNote,
-    RemindPage
+    DetailNote
   ],
   providers: [NotesService, AuthService]
 })

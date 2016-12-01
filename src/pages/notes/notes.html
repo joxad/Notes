@@ -24,10 +24,10 @@
     <ion-row *ngIf="showCreate">
       <ion-col>
         <button ion-button clear>
-          <ion-icon  name="attach"></ion-icon>
+          <ion-icon name="attach"></ion-icon>
         </button>
         <button ion-button clear>
-          <ion-icon  name="list"></ion-icon>
+          <ion-icon name="list"></ion-icon>
         </button>
       </ion-col>
       <ion-col width-20>
@@ -38,22 +38,22 @@
 
   <ion-list no-lines>
     <ion-item *ngFor="let note of notes">
-      <ion-card (click)="showNote(note)">
+      <ion-card>
         <ion-card-title>
           <ion-row>
-            <ion-col *ngIf="note.title" padding>
+            <ion-col *ngIf="note.title" padding (click)="showNote(note)">
               {{note.title}}
             </ion-col>
             <ion-col>
               <ion-buttons end>
-                <button clear color="royal" ion-button (click)="deleteNote(note.$key)">
+                <button clear color="royal" ion-button (click)="deleteNote(note)">
                   <ion-icon name="trash" class="icon"></ion-icon>
                 </button>
               </ion-buttons>
             </ion-col>
           </ion-row>
         </ion-card-title>
-        <ion-card-content>
+        <ion-card-content (click)="showNote(note)">
           <ion-item>
             {{note.content}}
           </ion-item>
