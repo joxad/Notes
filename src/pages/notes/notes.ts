@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, ModalController, PopoverController } from 'ionic-angular';
 import { OnInit } from '@angular/core';
-import { NotesService} from '../../services/notes-services';
+import { NotesService} from '../../services/api/notes-services';
 import { Note } from '../../model/note';
 import { AccountPage } from '../account/account';
 import { DetailNote} from '../detail-note/detail-note';

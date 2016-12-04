@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { Note } from '../../model/note';
-import { NotesService }from '../../services/notes-services';
+import { NotesService }from '../../services/api/notes-services';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import * as moment from 'moment';
 

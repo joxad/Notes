@@ -4,11 +4,11 @@ import { MyApp } from './app.component';
 import { NotesPage } from '../pages/notes/notes';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AccountPage } from '../pages/account/account';
-import { NotesService } from '../services/notes-services';
-import { AuthService} from '../services/auth-service';
+import { NotesService } from '../services/api/notes-services';
+import { AuthService} from '../services/api/auth-service';
 import { DetailNote} from '../pages/detail-note/detail-note';
 import { Storage } from '@ionic/storage';
-import { PrefService} from '../services/pref-service';
+import { PrefService} from '../services/local/pref-service';
 
 
 @NgModule({

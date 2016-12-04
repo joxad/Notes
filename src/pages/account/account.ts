@@ -3,8 +3,8 @@ import { OnInit } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Account } from '../../model/account';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import {AuthService} from '../../services/auth-service';
-import {PrefService} from '../../services/pref-service';
+import {AuthService} from '../../services/api/auth-service';
+import {PrefService} from '../../services/local/pref-service';
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'
