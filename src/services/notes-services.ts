@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Note } from '../model/note';
 import {Http, Headers, RequestOptions} from '@angular/http';
-import { BASE_URL } from './config';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -26,7 +25,6 @@ export class NotesService {
   update(note: Note) {
     return this.http.put(this.notesUrl + "/" + note._id, note, this.options).map(res => res.json());
   }
-
   delete(id: string) {
     return this.http.delete(this.notesUrl + "/" + id).map(res => res.json());// ...and calling .json() on the response to return data
   }

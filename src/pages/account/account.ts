@@ -3,35 +3,53 @@ import { OnInit } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Account } from '../../model/account';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-
+import {AuthService} from '../../services/auth-service';
+import {PrefService} from '../../services/pref-service';
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'
 })
 export class AccountPage implements OnInit {
 
-  isCreate : boolean;
-  account : Account;
-  constructor(private viewCtrl: ViewController) {
+  isCreate: boolean;
+  account: Account;
+  constructor(private viewCtrl: ViewController, private authService: AuthService, private pref: PrefService) {
     this.isCreate = false;
-    this.account =  new Account();
+    this.account = new Account();
   }
 
   ngOnInit(): void {
 
   }
 
-
-  connect(): void {
-    //TODO call auth,
-    // if email exist : try to connect
-      // if pwd wrong show error password
-    // if email !exist, show is create
-    // update button to createaccount
-    this.isCreate = true;
+  register(): void {
+    this.authService.signupUser(this.account.email, this.account.password)
+      .subscribe(
+      data => {
+        console.log(data);
+        this.connect(this.account.email, this.account.password)
+      },
+      err => console.log(err)
+      );
   }
 
-  createAccount() : void {
+  connect(email: string, password: string): void {
+    //TODO call auth,
+    // if email exist : try to connect
+    // if pwd wrong show error password
+    // if email !exist, show is create
+    // update button to createaccount
+    this.authService.signInLocal(email, password).subscribe(
+      data => {
+        console.log(data);
+        this.pref.token(data.token);
+        this.dismiss();
+      },
+      err => console.log(err)
+    );
+  }
+
+  createAccount(): void {
   }
 
   dismiss(): void {

@@ -52,11 +52,14 @@ export class NotesPage implements OnInit {
     console.log("hide");
   }
 
-  deleteNote(note: Note): void {
+  deleteNote(event : Event,note: Note): void {
+    event.stopPropagation();
     this.notesService.delete(note._id).subscribe(data => {
         this.showToast(note.title + "has been deleted", 2000);
-        this.notes.remove(note);
-
+        var index = this.notes.indexOf(note, 0);
+        if (index > -1) {
+           this.notes.splice(index, 1);
+        }
     }, err => {
       console.log("delete error");
       this.showToast(err, 2000);

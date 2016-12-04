@@ -3,17 +3,18 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 
 
 @Injectable()
-export class AuthService {
-  private authUrl = "http://localhost:3030/signup";
+export class BaseService {
+  protected authUrl = "http://localhost:3030/signup";
 
-  private authLocalIn = "http://localhost:3030/auth/local";
+  protected authLocalIn = "http://localhost:3030/auth/local";
 
-  private headers: any;
-  private options: any;
+  protected headers: any;
+  protected options: any;
   data: any;
-  constructor(private http: Http) {
+  constructor(protected http: Http) {
     this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     this.options = new RequestOptions({ headers: this.headers }); // Create a request option
+
   }
 
   signupUser(newEmail: string, newPassword: string) {

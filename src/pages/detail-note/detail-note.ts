@@ -32,6 +32,7 @@ export class DetailNote implements OnInit {
       this.notesService.update(this.note).subscribe(
         data => {
           console.log(data);
+          this.dismiss();
         },
         error => {
           console.log(error);

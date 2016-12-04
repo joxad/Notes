@@ -11,20 +11,25 @@
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label floating>Ton email ?</ion-label>
-    <ion-input type="text" [(ngModel)]="account.email"></ion-input>
-  </ion-item>
+  <form>
+    <ion-item>
+      <ion-label floating>Ton email ?</ion-label>
+      <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Ton mot de passe ?</ion-label>
-    <ion-input type="password" [(ngModel)]="account.password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Ton mot de passe ?</ion-label>
+      <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+    </ion-item>
 
-  <button class="btnconnect" clear ion-button color="royal" (click)="connect()">
-    <ion-label>Se connecter</ion-label>
-    <ion-icon class="icon"  name="log-in"></ion-icon>
-  </button>
-
+    <button class="btnconnect" ion-button color="accent" (click)="connect(account.email, account.password)">
+      <ion-label>Me connecter</ion-label>
+      <ion-icon class="icon" name="log-in"></ion-icon>
+    </button>
+    
+    <button class="btnconnect" ion-button clear color="accent" (click)="register(account.email, account.password)">
+      <ion-label>M'inscrire</ion-label>
+    </button>
+  </form>
 
 </ion-content>
