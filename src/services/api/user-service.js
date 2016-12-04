@@ -10,6 +10,6 @@ export class UserService {
   }
 
   me() {
-    return this.get(usersUrlId.format(pref.userId()));
+    return this.get(usersUrlId.format(pref.getUserId()));
   }
 }
