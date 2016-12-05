@@ -7,6 +7,7 @@ export class PrefService {
   uId : string;
   constructor(private storage: Storage) {
     this.storage.get("token").then(token => this.tok = token);
+    this.storage.get("userId").then(id => this.uId = id);
   }
 
   token(token : string) {

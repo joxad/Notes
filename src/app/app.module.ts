@@ -9,6 +9,7 @@ import { AuthService} from '../services/api/auth-service';
 import { DetailNote} from '../pages/detail-note/detail-note';
 import { Storage } from '@ionic/storage';
 import { PrefService} from '../services/local/pref-service';
+import { UserService} from '../services/api/user-service';
 
 
 @NgModule({
@@ -30,6 +31,6 @@ import { PrefService} from '../services/local/pref-service';
     TabsPage,
     DetailNote
   ],
-  providers: [NotesService, AuthService, Storage, PrefService]
+  providers: [NotesService, AuthService, Storage, PrefService, UserService]
 })
 export class AppModule { }

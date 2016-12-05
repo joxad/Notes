@@ -3,8 +3,9 @@ import { OnInit } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Account } from '../../model/account';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import {AuthService} from '../../services/api/auth-service';
-import {PrefService} from '../../services/local/pref-service';
+import { AuthService } from '../../services/api/auth-service';
+import {UserService} from '../../services/api/user-service';
+
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'
@@ -13,12 +14,18 @@ export class AccountPage implements OnInit {
 
   isCreate: boolean;
   account: Account;
-  constructor(private viewCtrl: ViewController, private authService: AuthService, private pref: PrefService) {
+  constructor(private viewCtrl: ViewController, private authService: AuthService, private userService: UserService) {
     this.isCreate = false;
     this.account = new Account();
   }
 
   ngOnInit(): void {
+    this.userService.me().subscribe(data => {
+      this.account.email = data.email;
+    },
+      err => {
+
+      });
 
   }
 
@@ -42,10 +49,11 @@ export class AccountPage implements OnInit {
     this.authService.signInLocal(email, password).subscribe(
       data => {
         console.log(data);
-        this.pref.token(data.token);
         this.dismiss();
       },
-      err => console.log(err)
+      err => {
+        console.log(err);
+      }
     );
   }
 

@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import { Note } from '../../model/note';
-import {Http, Headers, RequestOptions} from '@angular/http';
+import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {BaseService} from './base-service';
+import {PrefService} from '../local/pref-service';
 
 @Injectable()
 export class NotesService extends BaseService {
   private notesUrl = "notes";
-  data: any;
-  constructor(protected http: Http) {
-    super(http);
+  constructor(protected http: Http, protected pref: PrefService) {
+    super(http, pref);
   }
 
   all() {
