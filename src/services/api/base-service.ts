@@ -27,7 +27,7 @@ export class BaseService {
   put(url: string, body: any) {
     return this.http.put(URL + url, body, this.options);
   }
-  delete(url: string, body: any) {
+  delete(url: string) {
     return this.http.delete(URL + url, this.options);
   }
 }

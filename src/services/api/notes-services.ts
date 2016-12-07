@@ -23,7 +23,7 @@ export class NotesService extends BaseService {
   update(note: Note) {
     return this.put(this.notesUrl + "/" + note._id, note).map(res => res.json());
   }
-  delete(id: string) {
+  remove(id: string) {
     return this.delete(this.notesUrl + "/" + id).map(res => res.json());// ...and calling .json() on the response to return data
   }
 

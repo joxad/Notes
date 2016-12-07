@@ -52,9 +52,9 @@ export class NotesPage implements OnInit {
     console.log("hide");
   }
 
-  deleteNote(event : Event,note: Note): void {
+  deleteNote(event: Event,note: Note): void {
     event.stopPropagation();
-    this.notesService.delete(note._id).subscribe(data => {
+    this.notesService.remove(note._id).subscribe(data => {
         this.showToast(note.title + "has been deleted", 2000);
         var index = this.notes.indexOf(note, 0);
         if (index > -1) {
