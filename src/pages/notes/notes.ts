@@ -5,6 +5,8 @@ import { NotesService} from '../../services/api/notes-services';
 import { Note } from '../../model/note';
 import { AccountPage } from '../account/account';
 import { DetailNote} from '../detail-note/detail-note';
+import {PrefService } from '../../services/local/pref-service';
+
 @Component({
   selector: 'page-notes',
   templateUrl: 'notes.html'
@@ -21,12 +23,15 @@ export class NotesPage implements OnInit {
     private modalCtrl: ModalController,
     private navCtrl: NavController,
     private notesService: NotesService,
-    private toastController: ToastController) {
+    private toastController: ToastController,
+    private prefService : PrefService) {
     this.newNote = new Note();
     this.showCreate = false;
   }
   ngOnInit(): void {
-    this.getNotes();
+    this.prefService.init().then(
+      () => this.getNotes()
+    );
     this.showCreate = false;
   }
 

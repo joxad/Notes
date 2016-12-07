@@ -5,29 +5,28 @@ import {PrefService} from '../local/pref-service';
 const URL = "http://localhost:3030/";
 
 export class BaseService {
-  protected headers: any;
-  protected options: any;
-
   constructor(protected http: Http, protected pref: PrefService) {
-    this.headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-    if (this.pref.getToken()) {
-      this.headers.append('Authorization',"Bearer "+this.pref.getToken());
-    }
-    this.options = new RequestOptions({ headers: this.headers });
-
      // Create a request option
   }
 
+  headers() {
+    let headers  = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+    if (this.pref.getToken()) {
+      headers.append('Authorization',"Bearer "+this.pref.getToken());
+    }
+    let options = new RequestOptions({ headers: headers });
+    return options;
+  }
   get(url: string) {
-    return this.http.get(URL+url, this.options);
+    return this.http.get(URL+url, this.headers());
   }
   post(url: string, body: any) {
-    return this.http.post(URL + url, body, this.options);
+    return this.http.post(URL + url, body, this.headers());
   }
   put(url: string, body: any) {
-    return this.http.put(URL + url, body, this.options);
+    return this.http.put(URL + url, body, this.headers());
   }
   delete(url: string) {
-    return this.http.delete(URL + url, this.options);
+    return this.http.delete(URL + url, this.headers());
   }
 }

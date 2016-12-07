@@ -6,8 +6,18 @@ export class PrefService {
   tok : string;
   uId : string;
   constructor(private storage: Storage) {
-    this.storage.get("token").then(token => this.tok = token);
-    this.storage.get("userId").then(id => this.uId = id);
+
+  }
+
+  init() {
+    let promiseToken = this.storage.get("token").then(
+      token => this.tok = token
+    );
+    let promiseUid = this.storage.get("userId").then(
+      id => this.uId = id
+    );
+
+    return Promise.all([promiseToken, promiseUid]);
   }
 
   token(token : string) {
