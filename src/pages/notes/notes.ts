@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, ModalController, PopoverController } from 'ionic-angular';
 import { OnInit } from '@angular/core';
-import { NotesService} from '../../services/api/notes-services';
+import { NotesService } from '../../services/api/notes-services';
 import { Note } from '../../model/note';
 import { AccountPage } from '../account/account';
-import { DetailNote} from '../detail-note/detail-note';
-import {PrefService } from '../../services/local/pref-service';
+import { DetailNote } from '../detail-note/detail-note';
+import { PrefService } from '../../services/local/pref-service';
+import { AuthService } from '../../services/api/auth-service';
 
 @Component({
   selector: 'page-notes',
@@ -24,15 +25,34 @@ export class NotesPage implements OnInit {
     private navCtrl: NavController,
     private notesService: NotesService,
     private toastController: ToastController,
-    private prefService : PrefService) {
+    private prefService: PrefService,
+    private authService: AuthService) {
     this.newNote = new Note();
     this.showCreate = false;
   }
   ngOnInit(): void {
+
+  }
+  ionViewWillEnter() {
+    this.loadData();
+  }
+
+  loadData() {
     this.prefService.init().then(
-      () => this.getNotes()
+      () => {
+        this.refreshToken();
+      }
     );
     this.showCreate = false;
+  }
+  refreshToken(): void {
+    if (this.prefService.getToken()) {
+      this.authService.refreshToken().subscribe(data => {
+        this.getNotes();
+      }, err => { });
+    } else {
+      //TODO show local notes
+    }
   }
 
   getNotes(): void {
@@ -46,6 +66,10 @@ export class NotesPage implements OnInit {
 
   showAccount(): void {
     let modal = this.modalCtrl.create(AccountPage);
+    modal.onDidDismiss(data => {
+      console.log(data);
+      this.loadData();
+    });
     modal.present();
   }
 
@@ -57,14 +81,14 @@ export class NotesPage implements OnInit {
     console.log("hide");
   }
 
-  deleteNote(event: Event,note: Note): void {
+  deleteNote(event: Event, note: Note): void {
     event.stopPropagation();
     this.notesService.remove(note._id).subscribe(data => {
-        this.showToast(note.title + "has been deleted", 2000);
-        var index = this.notes.indexOf(note, 0);
-        if (index > -1) {
-           this.notes.splice(index, 1);
-        }
+      this.showToast(note.title + "has been deleted", 2000);
+      var index = this.notes.indexOf(note, 0);
+      if (index > -1) {
+        this.notes.splice(index, 1);
+      }
     }, err => {
       console.log("delete error");
       this.showToast(err, 2000);
@@ -75,11 +99,11 @@ export class NotesPage implements OnInit {
     this.notesService.create(this.newNote).subscribe(
       data => {
         console.log(data);
-        this.notes = [ data, ...this.notes];
+        this.notes = [data, ...this.notes];
       },
       err => {
         console.log(err);
-       }
+      }
     );
     this.newNote = new Note();
     this.hideCreateNoteView();
@@ -98,7 +122,7 @@ export class NotesPage implements OnInit {
     });
   }
 
-  showToast(message: string, duration : number): void {
+  showToast(message: string, duration: number): void {
     let toast = this.toastController.create({
       message: message,
       duration: duration

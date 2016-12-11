@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions} from '@angular/http';
+import {Http, Headers, RequestOptions,Response} from '@angular/http';
 import {PrefService} from '../local/pref-service';
+import { Observable } from 'rxjs/Observable';
 
 const URL = "http://localhost:3030/";
 
@@ -29,4 +30,16 @@ export class BaseService {
   delete(url: string) {
     return this.http.delete(URL + url, this.headers());
   }
+
+  intercept(observable: Observable<Response>): Observable<Response> {
+       return observable.catch((err, source) => {
+           if (err.status  == 401 && this.pref.getToken()) {
+               //TODO refreshToken
+
+           } else {
+               return Observable.throw(err);
+           }
+       });
+
+   }
 }

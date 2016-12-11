@@ -7,7 +7,7 @@ import {PrefService} from '../local/pref-service';
 export class AuthService extends BaseService {
   private authUrl = "signup";
   private authLocalIn = "auth/local";
-
+  private authRefresh ="auth/token/refresh";
   data: any;
   constructor(protected http: Http, protected pref: PrefService) {
     super(http,pref);
@@ -30,5 +30,12 @@ export class AuthService extends BaseService {
       });
   }
 
+  refreshToken() {
+    return this.get(this.authRefresh)
+      .map(res => {
+        let data = res.json();
+        return data;
+      });
+  }
 
 }
