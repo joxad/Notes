@@ -7,6 +7,7 @@ import { AccountPage } from '../account/account';
 import { DetailNote } from '../detail-note/detail-note';
 import { PrefService } from '../../services/local/pref-service';
 import { AuthService } from '../../services/api/auth-service';
+import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'page-notes',
@@ -18,7 +19,7 @@ export class NotesPage implements OnInit {
   notes: any;
   selectedNote: any;
   showCreate: boolean;
-
+  isMobile: boolean;
   constructor(
     private popoverCtrl: PopoverController,
     private modalCtrl: ModalController,
@@ -26,9 +27,13 @@ export class NotesPage implements OnInit {
     private notesService: NotesService,
     private toastController: ToastController,
     private prefService: PrefService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private platform: Platform
+  ) {
     this.newNote = new Note();
     this.showCreate = false;
+    console.log(platform.width());
+    this.isMobile = platform.width() < 600;
   }
   ngOnInit(): void {
 
@@ -76,9 +81,17 @@ export class NotesPage implements OnInit {
   showCreateNoteView(): void {
     this.showCreate = true;
   }
-  hideCreateNoteView(): void {
-    this.showCreate = false;
-    console.log("hide");
+  hideCreateNoteView(event :Event): void {
+    if (this.showCreate) {
+      this.showCreate = false;
+      console.log("hide");
+    }
+  }
+
+
+  bookmarkNote(event: Event, note: Note): void {
+    event.stopPropagation();
+    //TODO add this note to my favorites
   }
 
   deleteNote(event: Event, note: Note): void {
@@ -106,7 +119,7 @@ export class NotesPage implements OnInit {
       }
     );
     this.newNote = new Note();
-    this.hideCreateNoteView();
+    this.hideCreateNoteView(null);
   }
 
   showCreateNoteNewPage(): void {
@@ -129,6 +142,10 @@ export class NotesPage implements OnInit {
     });
     toast.present();
   }
-
+  onResize(event) {
+    console.log(event.target.innerWidth);
+    this.isMobile = event.target.innerWidth < 600;
+    //TODO handle width height in order to make in responsive
+  }
 
 }

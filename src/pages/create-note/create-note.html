@@ -1,21 +1,19 @@
-<ion-card class="cardHeader" clear>
-  <ion-input type="text" class="title" placeholder="Titre" [(ngModel)]="note.title"></ion-input>
-  <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)" [(ngModel)]="note.content"></ion-input>
-  <ion-list>
-    <ion-item *ngFor="let items of note.items | async">
-    </ion-item>
-  </ion-list>
-  <ion-row>
+<ion-card class="cardHeader" clear (click)="showCreateNoteView()">
+  <ion-input *ngIf="showCreate" type="text" class="title" placeholder="Titre" [(ngModel)]="newNote.title"></ion-input>
+  <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)" [(ngModel)]="newNote.content"></ion-input>
+  <ion-row *ngIf="showCreate">
     <ion-col>
-      <button ion-button clear (click)="attach()">
-        <ion-icon  name="attach"></ion-icon>
+      <button ion-button clear>
+        <ion-icon name="attach"></ion-icon>
       </button>
-      <button ion-button clear (click)="checklist()">
-        <ion-icon  name="list"></ion-icon>
+      <button ion-button clear>
+        <ion-icon name="list"></ion-icon>
       </button>
     </ion-col>
-    <ion-col width-10>
-      <button ion-button clear (click)="saveNote()">OK</button>
+    <ion-col>
+      <ion-buttons end>
+        <button ion-button clear (click)="createNote()">OK</button>
+      </ion-buttons>
     </ion-col>
   </ion-row>
 </ion-card>

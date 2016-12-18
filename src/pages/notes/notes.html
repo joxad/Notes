@@ -14,9 +14,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-  <div class="overlay" (click)="hideCreateNoteView()"></div>
+<ion-content (window:resize)="onResize($event)">
+  <div class="overlay" (click)="hideCreateNoteView($event)"></div>
 
   <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
     <ion-input *ngIf="showCreate" type="text" class="title" placeholder="Titre" [(ngModel)]="newNote.title"></ion-input>
@@ -30,13 +29,40 @@
           <ion-icon name="list"></ion-icon>
         </button>
       </ion-col>
-      <ion-col width-10>
-        <button ion-button clear (click)="createNote()">OK</button>
+      <ion-col>
+        <ion-buttons end>
+          <button ion-button clear (click)="createNote()">OK</button>
+        </ion-buttons>
       </ion-col>
     </ion-row>
   </ion-card>
 
-  <ion-list no-lines>
+  <div *ngIf="!isMobile" style="display: flex; flex-wrap: wrap; align-items: stretch;">
+    <div *ngFor="let note of notes; let i = index" style="flex: 0 0 calc( 100% / 3 - 2px );" (click)="showNote(note)" >
+      <ion-card>
+        <ion-card-title>
+          <div style="display : flex; align-items: center" >
+            <h1>
+              {{note.title}}
+            </h1>
+            <ion-buttons style="margin-left: auto;">
+              <button clear color="royal" ion-button (click)="bookmarkNote($event,note)">
+                  <ion-icon name="bookmark"></ion-icon>
+                </button>
+              <button clear color="royal" ion-button (click)="deleteNote($event,note)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-buttons>
+          </div>
+        </ion-card-title>
+        <ion-card-content>
+          {{note.content}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-list *ngIf="isMobile" no-lines>
     <ion-item *ngFor="let note of notes">
       <ion-card>
         <ion-card-title>
@@ -46,19 +72,21 @@
             </ion-col>
             <ion-col>
               <ion-buttons end>
+                <button clear color="royal" ion-button (click)="bookmarkNote($event,note)">
+                  <ion-icon name="bookmark"></ion-icon>
+                </button>
                 <button clear color="royal" ion-button (click)="deleteNote($event,note)">
-                  <ion-icon name="trash" class="icon"></ion-icon>
+                  <ion-icon name="trash"></ion-icon>
                 </button>
               </ion-buttons>
             </ion-col>
           </ion-row>
         </ion-card-title>
         <ion-card-content (click)="showNote(note)">
-          <ion-item>
-            {{note.content}}
-          </ion-item>
+          {{note.content}}
         </ion-card-content>
       </ion-card>
     </ion-item>
   </ion-list>
+
 </ion-content>
