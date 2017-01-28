@@ -2,13 +2,15 @@
 # Project : Notes
 Crossplatform note application using ionic & electron with Angular 2.
 
+Use it in parallel with the server : https://github.com/joxad/BO-Notes
+
 # Steps done
 
 - Create web application
 - Create desktop application
 - Create mobile applications
 - List a mock of notes
-- Add a backoffice (firebase with angularfire2)
+- Add a backoffice => https://github.com/joxad/BO-Notes
 - Get the notes from the api
 
 #TODO

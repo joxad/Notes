@@ -29,12 +29,12 @@ export class AccountPage implements OnInit {
 
   }
 
-  register(): void {
-    this.authService.signupUser(this.account.email, this.account.password)
+  register(email: string, password: string): void {
+    this.authService.signupUser(email, password)
       .subscribe(
       data => {
         console.log(data);
-        this.connect(this.account.email, this.account.password)
+        this.connect(email, password)
       },
       err => console.log(err)
       );

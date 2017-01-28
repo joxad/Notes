@@ -37,30 +37,59 @@
     </ion-row>
   </ion-card>
 
-  <div *ngIf="!isMobile" style="display: flex; flex-wrap: wrap; align-items: stretch;">
-    <div *ngFor="let note of notes; let i = index" style="flex: 0 0 calc( 100% / 3 - 2px );" (click)="showNote(note)" >
-      <ion-card>
-        <ion-card-title>
-          <div style="display : flex; align-items: center" >
-            <h1>
-              {{note.title}}
-            </h1>
-            <ion-buttons style="margin-left: auto;">
-              <button clear color="royal" ion-button (click)="bookmarkNote($event,note)">
-                  <ion-icon name="bookmark"></ion-icon>
-                </button>
-              <button clear color="royal" ion-button (click)="deleteNote($event,note)">
-                  <ion-icon name="trash"></ion-icon>
-                </button>
-            </ion-buttons>
-          </div>
-        </ion-card-title>
-        <ion-card-content>
-          {{note.content}}
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
+  <ion-grid *ngIf="isLarge">
+    <ion-row wrap>
+      <ion-col width-33 *ngFor="let note of notes" (click)="showNote(note)">
+        <ion-card>
+          <ion-card-title>
+            <div style="display : flex; align-items: center">
+              <h1>
+                {{note.title}}
+              </h1>
+              <ion-buttons style="margin-left: auto;">
+                <button clear color="royal" ion-button (click)="bookmarkNote($event,note)">
+                    <ion-icon name="bookmark"></ion-icon>
+                  </button>
+                <button clear color="royal" ion-button (click)="deleteNote($event,note)">
+                    <ion-icon name="trash"></ion-icon>
+                  </button>
+              </ion-buttons>
+            </div>
+          </ion-card-title>
+          <ion-card-content>
+            {{note.content}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="isMedium">
+    <ion-row wrap>
+      <ion-col width-50 *ngFor="let note of notes" (click)="showNote(note)">
+        <ion-card>
+          <ion-card-title>
+            <div style="display : flex; align-items: center">
+              <h1>
+                {{note.title}}
+              </h1>
+              <ion-buttons style="margin-left: auto;">
+                <button clear color="royal" ion-button (click)="bookmarkNote($event,note)">
+                    <ion-icon name="bookmark"></ion-icon>
+                  </button>
+                <button clear color="royal" ion-button (click)="deleteNote($event,note)">
+                    <ion-icon name="trash"></ion-icon>
+                  </button>
+              </ion-buttons>
+            </div>
+          </ion-card-title>
+          <ion-card-content>
+            {{note.content}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-list *ngIf="isMobile" no-lines>
     <ion-item *ngFor="let note of notes">
