@@ -10,7 +10,7 @@ import { DetailNote} from '../pages/detail-note/detail-note';
 import { Storage } from '@ionic/storage';
 import { PrefService} from '../services/local/pref-service';
 import { UserService} from '../services/api/user-service';
-
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { UserService} from '../services/api/user-service';
     DetailNote
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ClickOutsideModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -15,11 +15,9 @@
 </ion-header>
 
 <ion-content (window:resize)="onResize($event)">
-  <div class="overlay" (click)="hideCreateNoteView($event)"></div>
-
-  <ion-card class="cardHeader" clear (click)="showCreateNoteView()">
+  <ion-card class="cardHeader" clear  (clickOutside)="hideCreateNoteView($event)" >
     <ion-input *ngIf="showCreate" type="text" class="title" placeholder="Titre" [(ngModel)]="newNote.title"></ion-input>
-    <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)" [(ngModel)]="newNote.content"></ion-input>
+    <ion-input type="text" placeholder="Une nouvelle idée ? Ajoute ça ici ;)" [(ngModel)]="newNote.content" (focus)="showCreateNoteView()"></ion-input>
     <ion-row *ngIf="showCreate">
       <ion-col>
         <button ion-button clear>
@@ -39,8 +37,8 @@
 
   <ion-grid *ngIf="isLarge">
     <ion-row wrap>
-      <ion-col width-33 *ngFor="let note of notes" (click)="showNote(note)">
-        <ion-card>
+      <ion-col width-33 *ngFor="let note of notes" >
+        <ion-card (click)="showNote(note)">
           <ion-card-title>
             <div style="display : flex; align-items: center">
               <h1>
@@ -67,7 +65,7 @@
   <ion-grid *ngIf="isMedium">
     <ion-row wrap>
       <ion-col width-50 *ngFor="let note of notes" (click)="showNote(note)">
-        <ion-card>
+        <ion-card (click)="showNote(note)">
           <ion-card-title>
             <div style="display : flex; align-items: center">
               <h1>

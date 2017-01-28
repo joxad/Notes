@@ -1,69 +1,73 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Note } from '../../model/note';
-import { NotesService }from '../../services/api/notes-services';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NotesService } from '../../services/api/notes-services';
+import { NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'detail-note',
-  templateUrl: 'detail-note.html'
+    selector: 'detail-note',
+    templateUrl: 'detail-note.html'
 })
 export class DetailNote implements OnInit {
-  @ViewChild('dateTime') dateSelector;
+    @ViewChild('dateTime') dateSelector;
 
-  minDate: string;
-  checklist: boolean;
-  note: any;
-  constructor(
-    private navController: NavController,
-    private navParams: NavParams,
-    private viewCtrl: ViewController,
-    private notesService: NotesService) {
-    this.note = navParams.get('note');
-    this.minDate = moment().startOf('day').format('YYYY-MM-DD');
-  }
+    minDate: string;
+    checklist: boolean;
+    note: any;
+    constructor(
+        private navController: NavController,
+        private navParams: NavParams,
+        private viewCtrl: ViewController,
+        private notesService: NotesService,
+        private platform: Platform) {
+        this.platform.registerBackButtonAction(() => {
+            this.dismiss();
+        });
+        this.note = navParams.get('note');
+        this.minDate = moment().startOf('day').format('YYYY-MM-DD');
+    }
 
-  ngOnInit(): void {
-    this.checklist = false;
-  }
+    ngOnInit(): void {
+        this.checklist = false;
+    }
 
-  saveNote(): void {
-    if (this.note._id) {
-      this.notesService.update(this.note).subscribe(
-        data => {
-          console.log(data);
-          this.dismiss();
-        },
-        error => {
-          console.log(error);
+    saveNote(): void {
+        if (this.note._id) {
+            this.notesService.update(this.note).subscribe(
+                data => {
+                    console.log(data);
+                    this.dismiss();
+                },
+                error => {
+                    console.log(error);
+                }
+            );
         }
-      );
+        else {
+            this.notesService.create(this.note);
+        }
+        console.log("save");
     }
-    else {
-      this.notesService.create(this.note);
+
+    checklistMode(): void {
+        this.checklist = true;
     }
-    console.log("save");
-  }
+    attach(): void {
 
-  checklistMode() : void {
-    this.checklist = true;
-  }
-  attach(): void {
+    }
+    showTime(): void {
+        this.dateSelector.open();
+    }
+    dismiss(): void {
+        this.viewCtrl.dismiss();
+    }
+    personAdd(): void {
 
-  }
-  showTime(): void {
-    this.dateSelector.open();
-  }
-  dismiss(): void {
-    this.viewCtrl.dismiss();
-  }
-  personAdd(): void {
+    }
+    share(): void {
 
-  }
-  share(): void {
+    }
+    star(): void {
 
-  }
-  star(): void {
-
-  }
+    }
 }

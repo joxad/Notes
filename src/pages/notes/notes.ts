@@ -22,8 +22,7 @@ export class NotesPage implements OnInit {
     isMobile: boolean;
     isLarge: boolean;
     isMedium: boolean;
-    constructor(
-        private popoverCtrl: PopoverController,
+    constructor(private popoverCtrl: PopoverController,
         private modalCtrl: ModalController,
         private navCtrl: NavController,
         private notesService: NotesService,
@@ -31,6 +30,7 @@ export class NotesPage implements OnInit {
         private prefService: PrefService,
         private authService: AuthService,
         private platform: Platform) {
+
         this.newNote = new Note();
         this.showCreate = false;
         console.log(platform.width());
@@ -80,19 +80,24 @@ export class NotesPage implements OnInit {
     }
 
     showCreateNoteView(): void {
+        console.log("show create view");
         this.showCreate = true;
     }
     hideCreateNoteView(event: Event): void {
         if (this.showCreate) {
             this.showCreate = false;
             console.log("hide");
+        } else {
+            this.showCreate = true;
+            console.log("nothing ot hide");
         }
     }
 
 
     bookmarkNote(event: Event, note: Note): void {
         event.stopPropagation();
-        //TODO add this note to my favorites
+        this.showToast(note.title + "is now part of your favorites", 2000);
+
     }
 
     deleteNote(event: Event, note: Note): void {
@@ -130,6 +135,7 @@ export class NotesPage implements OnInit {
         });
     }
     showNote(note: Note): void {
+        console.log("show detail");
         this.selectedNote = note;
         this.navCtrl.push(DetailNote, {
             note: note
