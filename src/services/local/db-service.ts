@@ -10,13 +10,13 @@ export class DBService {
   }
 
   getNotes() {
-    console.log("getnotes");
+    console.log("DBService : getnotes");
 
     return this.storage.get('notes');
   }
 
-  save(data) {
-    let newData = JSON.stringify(data);
+  save(notes) {
+    let newData = JSON.stringify(notes);
     console.log(newData);
     return this.storage.set('notes', newData);
   }

@@ -12,6 +12,7 @@ import { PrefService} from '../services/local/pref-service';
 import { DBService } from '../services/local/db-service';
 import { UserService} from '../services/api/user-service';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { NoteManager} from '../manager/note-manager';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,6 @@ import { ClickOutsideModule } from 'ng-click-outside';
     TabsPage,
     DetailNote
   ],
-  providers: [NotesService, AuthService, Storage, PrefService, UserService, DBService]
+  providers: [NotesService, AuthService, Storage, PrefService, UserService, DBService,NoteManager]
 })
 export class AppModule { }

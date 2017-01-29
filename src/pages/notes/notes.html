@@ -37,7 +37,7 @@
 
   <ion-grid *ngIf="isLarge">
     <ion-row wrap>
-      <ion-col width-33 *ngFor="let note of dbNotes" >
+      <ion-col width-33 *ngFor="let note of noteManager.observableNotes | async" >
         <ion-card (click)="showNote(note)">
           <ion-card-title>
             <div style="display : flex; align-items: center">
@@ -64,7 +64,7 @@
 
   <ion-grid *ngIf="isMedium">
     <ion-row wrap>
-      <ion-col width-50 *ngFor="let note of notes" (click)="showNote(note)">
+      <ion-col width-50 *ngFor="let note of noteManager.observableNotes | async" (click)="showNote(note)">
         <ion-card (click)="showNote(note)">
           <ion-card-title>
             <div style="display : flex; align-items: center">
@@ -90,7 +90,7 @@
   </ion-grid>
 
   <ion-list *ngIf="isMobile" no-lines>
-    <ion-item *ngFor="let note of notes">
+    <ion-item *ngFor="let note of noteManager.observableNotes | async">
       <ion-card>
         <ion-card-title>
           <ion-row>
