@@ -37,11 +37,11 @@
 
   <ion-grid *ngIf="isLarge">
     <ion-row wrap>
-      <ion-col width-33 *ngFor="let note of notes" >
+      <ion-col width-33 *ngFor="let note of dbNotes" >
         <ion-card (click)="showNote(note)">
           <ion-card-title>
             <div style="display : flex; align-items: center">
-              <h1>
+              <h1 *ngIf="note.title" >
                 {{note.title}}
               </h1>
               <ion-buttons style="margin-left: auto;">
@@ -68,7 +68,7 @@
         <ion-card (click)="showNote(note)">
           <ion-card-title>
             <div style="display : flex; align-items: center">
-              <h1>
+              <h1 *ngIf="note.title" >
                 {{note.title}}
               </h1>
               <ion-buttons style="margin-left: auto;">

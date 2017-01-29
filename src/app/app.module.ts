@@ -9,6 +9,7 @@ import { AuthService} from '../services/api/auth-service';
 import { DetailNote} from '../pages/detail-note/detail-note';
 import { Storage } from '@ionic/storage';
 import { PrefService} from '../services/local/pref-service';
+import { DBService } from '../services/local/db-service';
 import { UserService} from '../services/api/user-service';
 import { ClickOutsideModule } from 'ng-click-outside';
 
@@ -32,6 +33,6 @@ import { ClickOutsideModule } from 'ng-click-outside';
     TabsPage,
     DetailNote
   ],
-  providers: [NotesService, AuthService, Storage, PrefService, UserService]
+  providers: [NotesService, AuthService, Storage, PrefService, UserService, DBService]
 })
 export class AppModule { }

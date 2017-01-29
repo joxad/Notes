@@ -5,5 +5,6 @@ export class Note {
   dateCreation: number;
   checklist : boolean;
   reminder : Date;
+  offline : boolean;
   items : [any];
 }
