@@ -87,10 +87,7 @@ export class NotesPage implements OnInit {
         if (this.showCreate) {
             this.showCreate = false;
             console.log("hide");
-        } else {
-            this.showCreate = true;
-            console.log("nothing ot hide");
-        }
+        } 
     }
 
 
